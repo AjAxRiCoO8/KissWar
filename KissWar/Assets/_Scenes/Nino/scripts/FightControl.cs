@@ -3,20 +3,28 @@ using System.Collections;
 
 public class FightControl : MonoBehaviour {
 
-    public Transform target;
+    Transform target;
+
     public float speed = 3.0f;
     public float attackDamage = 1.0f;
     public float attackRange = 1.0f;
-    public float timeBetweenAttacks;
-    public float attackRadius;
+    public float attackRadius = 10.0f;
+
     public string targetTag;
 
+    float hitRate;
+    float timeBetweenAttacks = 3.0f;
+    int hp = 100;
 
-   
+
+
+
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag(targetTag).transform;
+        hitRate = timeBetweenAttacks;
+
 
     }
     
@@ -53,11 +61,18 @@ public class FightControl : MonoBehaviour {
 
      void AttackEnemy()
     {
-
-        if(Vector2.Distance(transform.position, target.position) <= 2.0f )
+        hitRate -= Time.deltaTime;
+        if(Vector2.Distance(transform.position, target.position) <= 2.0f && hitRate <= 0 )
         {
-          
-            Destroy(target.gameObject);
+
+            hp -= 25;
+            hitRate = timeBetweenAttacks;
+
+            if(hp <= 100)
+            {
+                Destroy(target.gameObject);
+            }
+            
             
         }
 
