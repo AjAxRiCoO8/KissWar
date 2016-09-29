@@ -8,14 +8,16 @@ public class FightControl : MonoBehaviour {
     public float attackDamage = 1.0f;
     public float attackRange = 1.0f;
     public float timeBetweenAttacks;
+    public float attackRadius;
     public string targetTag;
-    bool attack;
+
+
    
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag(targetTag).transform;
-        attack = false;
+
     }
     
     void Update()
@@ -28,46 +30,40 @@ public class FightControl : MonoBehaviour {
 
     void MoveUnit()
     {
-        if(Vector2.Distance(transform.position, target.position) <= 10f)
+        if(target != null)
         {
-            transform.LookAt(target.position);
-            transform.Rotate(new Vector2(0, -90), Space.Self);
-
-            if (Vector2.Distance(transform.position, target.position) > attackRange)
+            if (Vector2.Distance(transform.position, target.position) <= attackRadius)
             {
-                transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+                transform.LookAt(target.position);
+                transform.Rotate(new Vector2(0, -90), Space.Self);
+
+                if (Vector2.Distance(transform.position, target.position) > attackRange)
+                {
+                    transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+                }
             }
         }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag(targetTag).transform;
+        }
+       
         
     }
 
      void AttackEnemy()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.left);
-        
 
-        if(Vector2.Distance(transform.position, target.position) == attackRange)
+        if(Vector2.Distance(transform.position, target.position) <= 2.0f )
         {
-            attack = true;
+          
+            Destroy(target.gameObject);
+            
         }
-
-        if(attack == true)
-        {
-            if(hit)
-            {
-                
-                Destroy(hit.collider.gameObject);
-            }
-        }
-
 
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, -Vector2.left );
-    }
+ 
 
    
 }
