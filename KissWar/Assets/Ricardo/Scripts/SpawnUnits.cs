@@ -17,15 +17,10 @@ public class SpawnUnits : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		SpawnUnit ();
-
-		Debug.Log (upgradeState);
-		Debug.Log ("state1: " + upgradeState);
-		Debug.Log ("spawnRate: " + spawnRate);
 	}
 
 	public void SpawnUnit() {
 		spawnTimer -= Time.deltaTime;
-		Debug.Log ("first: " + spawnTimer);
 
 		if (spawnTimer <= 0) {
 			GameObject unit = Instantiate (unitPrefab,
@@ -33,14 +28,11 @@ public class SpawnUnits : MonoBehaviour {
 				transform.rotation) as GameObject;
 			unit.transform.localScale = new Vector2 (2, 2);
 			spawnTimer = spawnRate;
-			Debug.Log ("second: " + spawnTimer);
 		}
 	}
 
 	public void Upgrade() {
 		upgradeState++;
-
-		Debug.Log ("state: " + upgradeState);
 
 		if (upgradeState >= 5) {
 			upgradeState = 4;

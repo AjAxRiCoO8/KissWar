@@ -15,6 +15,7 @@ public class FightControl : MonoBehaviour {
     float timeBetweenAttacks = 3.0f;
     int hp = 100;
 
+	Rigidbody2D rb;
 
 
 
@@ -24,7 +25,7 @@ public class FightControl : MonoBehaviour {
         target = GameObject.FindGameObjectWithTag(targetTag).transform;
         hitRate = timeBetweenAttacks;
 
-
+		rb = GetComponent<Rigidbody2D> ();
     }
     
     void Update()
@@ -57,6 +58,26 @@ public class FightControl : MonoBehaviour {
        
         
     }
+
+	public void MoveUnit(Transform target, float speed)
+	{
+		if(target != null)
+		{
+				transform.LookAt(target.position);
+				transform.Rotate(new Vector2(0, -90), Space.Self);
+
+				if (Vector2.Distance(transform.position, target.position) > attackRange)
+				{
+					rb.velocity = (new Vector2 (speed * Time.deltaTime, 0));
+				}
+		}
+		else
+		{
+			target = GameObject.FindGameObjectWithTag(targetTag).transform;
+		}
+
+
+	}
 
      void AttackEnemy()
     {

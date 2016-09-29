@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyBehaviour : MonoBehaviour {
 
 	public float buyRate = 10f;
+	public float unitMovementRate = 2f;
 	public GameObject factoryPrefab;
 
 	ArrayList factoryPositions = new ArrayList ();
@@ -11,10 +12,12 @@ public class EnemyBehaviour : MonoBehaviour {
 	int unitCount;
 	float buyTimer;
 	int factoryCounter = 0;
+	float unitMovementTimer;
 
 	// Use this for initialization
 	void Start () {
 		buyTimer = buyRate;
+		unitMovementTimer = unitMovementRate;
 
 		factoryPositions.Add (new Vector3 (-9, 0, 0));
 		factoryPositions.Add (new Vector3 (-9, 1, 0));
@@ -28,6 +31,17 @@ public class EnemyBehaviour : MonoBehaviour {
 		unitCount = GameObject.FindGameObjectsWithTag ("Enemy").Length;
 
 		buyFactory ();
+
+		MoveUnit ();
+	}
+
+	void FixedUpdate() {
+		unitMovementTimer -= Time.deltaTime;
+
+		if (unitMovementTimer <= 0) {
+			MoveUnit ();
+			unitMovementTimer = unitMovementRate;
+		}
 	}
 
 	public float CheckResources() {
@@ -54,5 +68,14 @@ public class EnemyBehaviour : MonoBehaviour {
 		Instantiate (factoryPrefab,
 			(Vector3)factoryPositions[positionPlacement],
 			transform.rotation);
+	}
+
+	public void MoveUnit() {
+		Debug.Log ("MoveUnit called");
+		GameObject[] units = GameObject.FindGameObjectsWithTag ("Enemy");
+		GameObject unit = units [(int)(Random.value * units.Length)];
+		GameObject playerUnit = GameObject.FindGameObjectWithTag ("Unit");
+
+		unit.GetComponent<FightControl> ().MoveUnit (playerUnit.transform, 20);
 	}
 }
