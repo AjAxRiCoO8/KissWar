@@ -4,9 +4,9 @@ using System.Collections;
 public class SpawnUnits : MonoBehaviour {
 
 	public GameObject unitPrefab;
-	public float spawnRate = 3f;
-	public int upgradeState = 1;
 
+	float spawnRate = 3f;
+	int upgradeState = 1;
 	float spawnTimer;
 
 	// Use this for initialization
@@ -17,20 +17,31 @@ public class SpawnUnits : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		SpawnUnit ();
+
+		Debug.Log (upgradeState);
+		Debug.Log ("state1: " + upgradeState);
+		Debug.Log ("spawnRate: " + spawnRate);
 	}
 
 	public void SpawnUnit() {
 		spawnTimer -= Time.deltaTime;
+		Debug.Log ("first: " + spawnTimer);
 
 		if (spawnTimer <= 0) {
-			Instantiate (unitPrefab,
+			GameObject unit = Instantiate (unitPrefab,
 				transform.position,
-				transform.rotation);
+				transform.rotation) as GameObject;
+			unit.transform.localScale = new Vector2 (2, 2);
 			spawnTimer = spawnRate;
+			Debug.Log ("second: " + spawnTimer);
 		}
 	}
 
 	public void Upgrade() {
+		upgradeState++;
+
+		Debug.Log ("state: " + upgradeState);
+
 		if (upgradeState >= 5) {
 			upgradeState = 4;
 		}
