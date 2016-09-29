@@ -8,26 +8,21 @@ public class Tongue : MonoBehaviour
         Left,
         Right
     }
-
     public TongueSide tongueSide;
-
-    public bool bridgeIsUp = false;
-    [SerializeField]
+    
+    public bool bridgeIsUp = true;
     private bool changingBridgeStance = false;
-
 
     [Header("Distances")]
     public Vector3 distanceToMove;
-    public Vector3 destination;
+    private Vector3 destination;
     public float timeToReachDestination;
 
     [Header("Timing")]
-    [Tooltip("The time the tongues stay up, so the characters CAN cross the bridge")]
     public float timeUp;
-    private float currentTimeUp;
-
-    [Tooltip("The time the tongues stay down, so the characters CANT cross the bridge")]
     public float timeDown;
+
+    private float currentTimeUp;
     private float currentTimeDown;
 
 
