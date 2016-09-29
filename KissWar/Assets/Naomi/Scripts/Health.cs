@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingScript : MonoBehaviour
+public class Health : MonoBehaviour
 {
     public GameObject healthBar;
 

@@ -5,7 +5,7 @@ public class FightControl : MonoBehaviour {
 
     Transform target;
     public float speed = 3.0f;
-    public float attackDamage = 1.0f;
+    public float attackDamage = 10f;
     public float attackRange = 1.0f;
     public float attackRadius = 10.0f;
 
@@ -13,26 +13,17 @@ public class FightControl : MonoBehaviour {
 
     float hitRate;
     float timeBetweenAttacks = 3.0f;
-    int hp = 100;
-
-
-
-
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag(targetTag).transform;
         hitRate = timeBetweenAttacks;
-
-
     }
     
     void Update()
     {
         MoveUnit();
         AttackEnemy();
-
-
     }
 
     void MoveUnit()
@@ -54,27 +45,21 @@ public class FightControl : MonoBehaviour {
         {
             target = GameObject.FindGameObjectWithTag(targetTag).transform;
         }
-       
-        
     }
 
      void AttackEnemy()
-    {
+     {
         hitRate -= Time.deltaTime;
         if(Vector2.Distance(transform.position, target.position) <= 2.0f && hitRate <= 0 )
         {
-
-            hp -= 25;
+            target.GetComponent<Health>().curHealth -= attackDamage;
             hitRate = timeBetweenAttacks;
 
-            if(hp <= 100)
+            if(target.GetComponent<Health>().curHealth <= 0)
             {
                 Destroy(target.gameObject);
             }
-            
-            
         }
-
     }
 
  
