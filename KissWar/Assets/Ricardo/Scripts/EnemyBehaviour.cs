@@ -31,8 +31,6 @@ public class EnemyBehaviour : MonoBehaviour {
 		unitCount = GameObject.FindGameObjectsWithTag ("Enemy").Length;
 
 		buyFactory ();
-
-		MoveUnit ();
 	}
 
 	void FixedUpdate() {

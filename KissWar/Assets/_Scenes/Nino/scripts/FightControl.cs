@@ -13,25 +13,17 @@ public class FightControl : MonoBehaviour {
 
     float hitRate;
     float timeBetweenAttacks = 3.0f;
-<<<<<<< HEAD
     int hp = 100;
 
 	Rigidbody2D rb;
-
-
-
-=======
->>>>>>> origin/master
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag(targetTag).transform;
         hitRate = timeBetweenAttacks;
-<<<<<<< HEAD
+
 
 		rb = GetComponent<Rigidbody2D> ();
-=======
->>>>>>> origin/master
     }
     
     void Update()
