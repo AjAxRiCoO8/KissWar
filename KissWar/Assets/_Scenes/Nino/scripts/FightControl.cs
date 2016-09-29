@@ -4,7 +4,6 @@ using System.Collections;
 public class FightControl : MonoBehaviour {
 
     Transform target;
-
     public float speed = 3.0f;
     public float attackDamage = 1.0f;
     public float attackRange = 1.0f;
