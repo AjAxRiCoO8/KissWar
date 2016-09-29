@@ -38,8 +38,8 @@ public class FightControl : MonoBehaviour {
         {
             if (Vector2.Distance(transform.position, target.position) <= attackRadius)
             {
-                transform.LookAt(target.position);
-                transform.Rotate(new Vector2(0, -90), Space.Self);
+                //transform.LookAt(target.position);
+                //transform.Rotate(new Vector2(0, -90), Space.Self);
 
                 if (Vector2.Distance(transform.position, target.position) > attackRange)
                 {
@@ -57,8 +57,8 @@ public class FightControl : MonoBehaviour {
 	{
 		if(target != null)
 		{
-				transform.LookAt(target.position);
-				transform.Rotate(new Vector2(0, -90), Space.Self);
+				//transform.LookAt(target.position);
+				//transform.Rotate(new Vector2(0, -90), Space.Self);
 
 				if (Vector2.Distance(transform.position, target.position) > attackRange)
 				{
